@@ -4,7 +4,7 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
-use App\Config\ConexaoBD;
+use App\SQL\ConexaoBD;
 
 
 class UsuarioModel

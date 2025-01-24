@@ -64,17 +64,17 @@ class CategoriaModel
     }
 
 
-    public function deletar($id)
+    public function deletarCategoria($id): void
     {
-        $sql = 'DELETE FROM categorias WHERE id = :id';
+        $categoria = $this->buscarPorId($id);
+
         try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Erro ao deletar categoria: " . $e->getMessage();
-            return false;
+            $sql = "DELETE FROM categorias WHERE id = ?";
+            $statement = $this->pdo->prepare(query: $sql);
+            $statement->bindValue(param: 1, value: $categoria->getId(), type: \PDO::PARAM_INT);
+            $statement->execute();
+        } catch (\PDOException $e) {
+            die($e->getMessage());
         }
     }
 

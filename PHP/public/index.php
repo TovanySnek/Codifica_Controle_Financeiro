@@ -1,75 +1,93 @@
 <?php
 
-
-require __DIR__ . '/../vendor/autoload.php';  
-
 session_start();
 
-use App\Controller\Controller;
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../scr/SQL/ConexaoBD.php';  
 
+use App\Controllers\CategoriaController;
+use App\Controllers\TransacaoController;
+use App\Controllers\DashboardController;
+use App\Controllers\UsuarioController;
 
-$controller = new Controller();
+//if ( ! class_exists('DashboardController')) 
+//    die('There is no hope!');
 
+$caminho = rtrim($_SERVER['PATH_INFO'], '/');
 
-$caminho = rtrim(string: strtok(string: $_SERVER['REQUEST_URI'], token: '?'), characters: '/') ?: '/';
-
-if (!isset($_SESSION['usuario_id']) && $page !== '/autenticacao/login' && $page !== '/autenticacao/registro' && $page !== '/autenticacao/registro/registrar' && $page !== '/autenticacao/login/validar') {
-    header(header: 'Location: /autenticacao/login');
-    exit;
-}
 
 if ($caminho == '/dashboard') {    
-    return $controller->dashboard();
+    $dashboardController = new DashboardController();
+    $dashboardController->exibirDashboard();
 }
-if ($caminho == '/sessao/login') {
-    return $controller->login();
+if ($caminho == '/login') {
+    $usuarioController = new UsuarioController();
+    $usuarioController->paginaLogin();
 }
-if ($caminho == '/sessao/logout') {
-    return $controller->logout();
+if ($caminho == '/validar-login') {
+    $usuarioController = new UsuarioController();
+    $usuarioController->validarLogin();
 }
-if ($caminho == '/sessao/autenticar') {
-    return $controller->autenticarLogin(email: $_POST['email'], senha: $_POST['senha']);;
+if ($caminho == '/logout') {
+    $usuarioController = new UsuarioController();
+    $usuarioController->logout();
 }
-if ($caminho == '/sessao/registro') {
-    return $controller->registro();
+if ($caminho == '/cadastro') {
+    $usuarioController = new UsuarioController();
+    $usuarioController->paginaCadastro();
 }
-if ($caminho == '/produtos/atualizar') {
-    return $controller->atualizar();
+if ($caminho == '/criar-conta') {
+    $usuarioController = new UsuarioController();
+    $usuarioController->salvarConta();
 }
-if ($caminho == '/sessao/registro/registrar') {
-    return $controller->registrarUsuario(nome: $_POST['nome'], email: $_POST['email'], senha: $_POST['senha']);
+if ($caminho == '/transacoes') {
+    $transacaoController = new TransacaoController();
+    $transacaoController->listarTransacoes();
 }
-if ($caminho == '/transacao/adicionar') {
-    return $controller->adicionarTransacao();
+if ($caminho == '/criar-transacao') {
+    $transacaoController = new TransacaoController();
+    $transacaoController->criarTransacao();
 }
-if ($caminho == '/transacao/adicionar/salvar') {
-    return $controller->salvarTransacao(tipo: $_POST['tipo'], categoriaNome: $_POST['categoriaNome'], descricao: $_POST['descricao'], valor: $_POST['valor'], data: $_POST['data']);
+if ($caminho == '/salvar-transacao') {
+    $transacaoController = new TransacaoController();
+    $transacaoController->salvarTransacao();
 }
-if ($caminho == '/transacao/editar') {
-    return $controller->editarTransacao(transacaoId: $_GET['transacaoId']);
+if ($caminho == '/editar-transacao') {
+    $transacaoController = new TransacaoController();
+    $transacaoController->editarTransacao();
 }
-if ($caminho == '/transacao/editar/atualizar') {
-    return $controller->editarTransacao(categoriaId: $_POST['categoriaId'], transacaoId: $_POST['transacaoId']);
+if ($caminho == '/atualizar-transacao') {
+    $transacaoController = new TransacaoController();
+    $transacaoController->atualizarTransacao();
 }
-if ($caminho == '/transacao/deletar') {
-    return $controller->deletarTransacao(transacaoId: $_POST['transacaoId']);
+if ($caminho == '/deletar-transacao') {
+    $transacaoController = new TransacaoController();
+    $transacaoController->deletarTransacao();   
 }
 if ($caminho == '/categorias') {
-    return $controller->categorias();
+    $categoriaController = new CategoriaController();
+    $categoriaController->listarCategorias();
 }
-if ($caminho == '/categoria/salvar') {
-    return $controller->salvarCategoria(categoriaNome: $_POST['categoriaNome']);
+if ($caminho == '/criar-categoria') {
+    $categoriaController = new CategoriaController();
+    $categoriaController->criarCategoria();
 }
-if ($caminho == '/categoria/deletar') {
-    return $controller->deletarCategoria(categoriaId: $_POST['categoriaId']);
+if ($caminho == '/salvar-categoria') {
+    $categoriaController = new CategoriaController();
+    $categoriaController->salvarCategoria();
 }
-if ($caminho == '/categoria/editar') {
-    return $controller->editarCategoria(categoriaNome: $_POST['categoriaNome'], editarCategoriaId: $_POST['editarCategoriaId']);
+if ($caminho == '/atualizar-categoria') {
+    $categoriaController = new CategoriaController();
+    $categoriaController->atualizarCategoria();
 }
-
-echo "Página não encontrada :(";
+if ($caminho == '/deletar-categoria') {
+    $categoriaController = new CategoriaController();
+    $categoriaController->deletarCategoria($id);
+}
+if ($caminho == '/editar-categoria') {
+    $categoriaController = new CategoriaController();
+    $categoriaController->editarCategoria();
+}
+else
 header('Location: /dashboard');
 
-
-
-?>

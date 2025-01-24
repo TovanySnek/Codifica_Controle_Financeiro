@@ -24,6 +24,6 @@ class DashboardController
         $ultimasReceitas = $this->dashboardModel->ultimasReceitas();
         $ultimasDespesas = $this->dashboardModel->ultimasDespesas();
 
-        require __DIR__ . '/../Views/Dashboard/dashboard.php';
+        require __DIR__ . '/../View/Dashboard.php';
     }
 }

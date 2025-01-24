@@ -4,13 +4,13 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
-use App\Config\ConexaoBD;
+use App\SQL\ConexaoBD;
 
 class DashboardModel {
     private PDO $pdo;
 
     public function __construct() {
-        $this->pdo = ConexaoBD::criarConexao();
+        $this->pdo = ConexaoBD::Conexao();
     }
 
     public function calcularReceitas() {

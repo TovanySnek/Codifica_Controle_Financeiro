@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use App\Models\CategoriaModel;
 use App\Models\TransacaoModel;
@@ -62,12 +62,11 @@ class CategoriaController
     }
 
 
-    public function deletarCategoria(int $categoriaId): void
+    public function deletarCategoria($id)
     {
-        $this->categoriaModel->deletarCategoria(categoriaId: $categoriaId);
+        $this->categoriaModel   ->deletarCategoria($id);
         header(header: "location: /categorias");
     }
-
 
 
 }

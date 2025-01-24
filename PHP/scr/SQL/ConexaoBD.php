@@ -4,14 +4,14 @@ namespace App\SQL;
 
 use PDO;
 
-class ConexaoDB
+class ConexaoBD
 {
     public static function Conexao(): PDO
     {
         try {
             $conexao = new PDO(
-                dsn: 'mysql:host=127.0.0.1;dbname=controle_financeiro',
-                username: 'controle_financeiro_user',
+                dsn: 'mysql:host=localhost;dbname=controle_financeiro',
+                username: 'root',
                 password: '1234'
             );
             $conexao->setAttribute(attribute: PDO::ATTR_ERRMODE, value: PDO::ERRMODE_EXCEPTION);

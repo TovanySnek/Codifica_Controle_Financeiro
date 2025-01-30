@@ -33,12 +33,6 @@
                     <li class="nav__superior selecionado"><a href="/categorias"><i class="fa-solid fa-tags"></i>
                             &nbspCategorias</a>
                     </li>
-                    <li class="nav__superior"><a href="/relatorios"><i class="fa-solid fa-file-lines"></i> &nbspRelatórios</a>
-                    </li>
-                    <!-- <li class="nav__superior"><a href="#"><i class="fa-solid fa-download"></i>
-                            &nbspImportar/Exportar</a></li> -->
-                    <li class="nav__superior premium"><a class="premium" href="/premium"><i class="fa-solid fa-crown"></i>
-                            &nbsp<?= $_SESSION['user_level'] == 2 ? "Seja " : "Conta " ?>Premium</a></li>
                 </ul>
             </nav>
             <nav class="nav__inferior">

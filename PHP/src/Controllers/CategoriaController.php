@@ -19,12 +19,12 @@ class CategoriaController
     public function listarCategorias()
     {
         $categorias = $this->categoriaModel->listar();
-        require __DIR__ . '/../Views/Categorias/listar_categorias.php';
+        require __DIR__ . '/../View/Categoria/ListarCategoria.php';
     }
 
     public function criarCategoria()
     {
-        require __DIR__ . '/../Views/Categorias/formulario_categoria.php';
+        require __DIR__ . '/../View/Categoria/FormCategoria.php';
     }
 
     public function salvarCategoria()
@@ -44,7 +44,7 @@ class CategoriaController
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         if ($id && is_numeric($id)) {
             $categoria = $this->categoriaModel->buscarPorId($id);
-            require __DIR__ . '/../Views/Categorias/formulario_categoria.php';
+            require __DIR__ . '/../View/Categoria/FormCategoria.php';
         }
     }
 
@@ -62,9 +62,12 @@ class CategoriaController
     }
 
 
-    public function deletarCategoria($id)
+    public function deletarCategoria($categoria_id)
     {
-        $this->categoriaModel   ->deletarCategoria($id);
+
+        $this->categoriaModel->deletar($categoria_id);
+            
+
         header(header: "location: /categorias");
     }
 

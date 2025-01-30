@@ -29,7 +29,7 @@ class TransacaoController
         $dadosGerais = $this->transacaoModel->dadosGeraisComFiltro($filtros);
         $transacoes = $this->transacaoModel->buscarComFiltros($filtros);
         $categorias = $this->categoriaModel->listar();
-        require __DIR__ . '/../Views/Transacoes/listar_transacoes.php';
+        require __DIR__ . '/../View/Transacao/Listar_Transacao.php';
     }
 
     public function definirTipoTransacao() {
@@ -37,12 +37,13 @@ class TransacaoController
     }
 
     public function criarTransacao() {
-        $tipo = $_POST['tipo'];
+        //$tipo = $_POST['tipo'];
 
-        if ($tipo) {
-            $categorias = $this->categoriaModel->listarPorTipo($tipo);
-            require __DIR__ . '/../Views/Transacoes/formulario_transacao.php';
-        }
+       // if ($tipo) {
+       //     $categorias = $this->categoriaModel->listarPorTipo($tipo);
+       //     require __DIR__ . '/../Views/Transacoes/formulario_transacao.php';
+        //}
+        require __DIR__ . '/../View/Transacao/Criar.php';
     }
 
     public function salvarTransacao() {

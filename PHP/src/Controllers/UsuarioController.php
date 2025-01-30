@@ -18,7 +18,7 @@ class UsuarioController
 
     public function paginaLogin()
     {
-        require __DIR__ . '/../Views/Usuarios/login.php';
+        require __DIR__ . '/../View/Usuario/Login.php';
         exit;
     }
     public function validarLogin()
@@ -59,7 +59,7 @@ class UsuarioController
 
     public function paginaCadastro()
     {
-        require __DIR__ . '/../Views/Usuarios/cadastro.php';
+        require __DIR__ . '/../View/Usuario/Registro.php';
         exit;
     }
 
@@ -86,7 +86,7 @@ class UsuarioController
     
         $senhaComHash = password_hash($senha, PASSWORD_DEFAULT);
     
-        $this->usuarioModel->salvar($nome, $email, $senhaComHash);
+        $this->usuarioModel->salvar($nome, $email, $senha);
     
         $usuario = $this->usuarioModel->retornaId($email);
     

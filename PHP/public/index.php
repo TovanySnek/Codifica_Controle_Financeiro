@@ -3,20 +3,21 @@
 session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../scr/SQL/ConexaoBD.php';  
+require __DIR__ . '/../src/SQL/ConexaoBD.php';  
 
 use App\Controllers\CategoriaController;
 use App\Controllers\TransacaoController;
 use App\Controllers\DashboardController;
 use App\Controllers\UsuarioController;
 
-//if ( ! class_exists('DashboardController')) 
-//    die('There is no hope!');
+$caminho = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$caminho = rtrim($_SERVER['PATH_INFO'], '/');
+if (!isset($_SESSION['user_id']) && $caminho !== '/login' && $caminho !== '/validar-login' && $caminho !== '/cadastro' && $caminho !== '/criar-conta') {
+   header(header: 'Location: /login');
+   exit;
+}
 
-
-if ($caminho == '/dashboard') {    
+if ($caminho == '/') {    
     $dashboardController = new DashboardController();
     $dashboardController->exibirDashboard();
 }
@@ -82,12 +83,11 @@ if ($caminho == '/atualizar-categoria') {
 }
 if ($caminho == '/deletar-categoria') {
     $categoriaController = new CategoriaController();
-    $categoriaController->deletarCategoria($id);
+    $categoriaController->deletarCategoria($categoria_id);
 }
 if ($caminho == '/editar-categoria') {
     $categoriaController = new CategoriaController();
     $categoriaController->editarCategoria();
 }
-else
-header('Location: /dashboard');
+
 

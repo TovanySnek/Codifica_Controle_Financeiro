@@ -49,6 +49,21 @@ class UsuarioModel
     {
         $senhaValidada = password_verify($senha, $usuarioValidado['senha']);
         return $senhaValidada;
+
+        //$sql = "SELECT * FROM usuarios WHERE senha = :senha";
+
+        //try {
+        //    $stmt = $this->pdo->prepare($sql);
+        //    $stmt->bindValue(':email', $senha);
+        //    $stmt->execute();
+
+        //    return $stmt->fetch(PDO::FETCH_ASSOC);
+        //} catch (PDOException $e) {
+        //    echo "Erro ao buscar usuário: " . $e->getMessage();
+        //    return null;
+        //}
+        //$senhaValidada = $senha;
+        //return $senhaValidada;
     }
 
     public function salvar($nome, $email, $senha)

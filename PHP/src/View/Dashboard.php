@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
@@ -33,14 +27,6 @@
                     <li class="nav__superior "><a href="/categorias"><i class="fa-solid fa-tags"></i>
                             &nbspCategorias</a>
                     </li>
-                    <li class="nav__superior"><a href="/relatorios"><i class="fa-solid fa-file-lines"></i>
-                            &nbspRelatórios</a>
-                    </li>
-                    <!-- <li class="nav__superior"><a href="#"><i class="fa-solid fa-download"></i>
-                            &nbspImportar/Exportar</a></li> -->
-                    <li class="nav__superior premium"><a class="premium" href="/premium"><i
-                                class="fa-solid fa-crown"></i>
-                            &nbsp<?= $_SESSION['user_level'] == 2 ? "Seja " : "Conta " ?>Premium</a></li>
                 </ul>
             </nav>
             <nav class="nav__inferior">

@@ -17,16 +17,16 @@ class CategoriaModel
 
     public function listar()
     {
+        $usuarioId = $_SESSION['user_id'];
+        $sql = 'SELECT * FROM categorias WHERE usuario_id = :usuarioId OR usuario_id = 999 ORDER BY tipo ASC';
         try {
-            $sql = "SELECT id, nome FROM categorias WHERE usuario_id = ?";
-            $statement = $this->pdo->prepare(query: $sql);
-            $statement->bindValue(param: 1, value: $_SESSION['usuario_id']);
-            $statement->execute();
-            $categoriasArray = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-            return array_map(callback: [$this, 'criarObjetoCategoria'], array: $categoriasArray);
-        } catch (\PDOException $e) {
-            die($e->getMessage());
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':usuarioId', $usuarioId);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Erro ao buscar categorias: " . $e->getMessage();
+            return [];
         }
     }
 
@@ -64,17 +64,19 @@ class CategoriaModel
     }
 
 
-    public function deletarCategoria($id): void
+    public function deletar($categoria_id)
     {
-        $categoria = $this->buscarPorId($id);
-
+        $categoria_id = $_GET['id'];
+        //$sql = 'DELETE FROM categorias WHERE id = :id';
         try {
             $sql = "DELETE FROM categorias WHERE id = ?";
-            $statement = $this->pdo->prepare(query: $sql);
-            $statement->bindValue(param: 1, value: $categoria->getId(), type: \PDO::PARAM_INT);
-            $statement->execute();
-        } catch (\PDOException $e) {
-            die($e->getMessage());
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id', $categoria_id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao deletar categoria: " . $e->getMessage();
+            return false;
         }
     }
 
